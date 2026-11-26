@@ -1,0 +1,337 @@
+/* ---------- Colors and type: change these to restyle the whole site ---------- */
+:root {
+  --base: #060914;      /* deep space background */
+  --blue: #2c47b8;      /* nebula glow colors */
+  --violet: #6b3fc0;
+  --pink: #a2428f;
+  --teal: #1a7a96;
+  --ink: #eef1fb;       /* main text */
+  --muted: #a4adc9;     /* secondary text */
+  --accent: #a9b9ff;    /* links and highlights */
+  --accent-soft: #a9b9ff22;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;   /* headline font, Times-style but more refined */
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: clamp(15px, 13.5px + .3vw, 18px); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--base);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  letter-spacing: -0.015em;          /* the narrow Inter spacing */
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-weight: 600; line-height: 1.08; margin: 0; }
+h1 { letter-spacing: -0.045em; }
+h3 { letter-spacing: -0.03em; }
+/* Inter does most of the work; the serif appears as an elegant italic accent word */
+h1 em { font-family: var(--serif); font-style: italic; font-weight: 500; letter-spacing: -0.01em; font-size: 1.1em; color: var(--accent); }
+img { max-width: 100%; }
+p { margin: 0 0 1.1rem; }
+a { color: var(--accent); text-decoration-color: transparent; text-underline-offset: 4px;
+    transition: color .3s var(--ease), text-decoration-color .3s var(--ease); }
+a:hover { text-decoration-color: currentColor; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.wrap { max-width: 68rem; margin: 0 auto; padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
+
+/* ---------- Wallpaper: soft, slowly moving color like a macOS desktop ---------- */
+.wallpaper { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--base); }
+.wallpaper i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; will-change: transform; }
+.wallpaper i:nth-child(1) { width: 55vw; height: 55vw; left: -10vw; top: -15vw; background: var(--blue);   animation: float1 28s ease-in-out infinite alternate; }
+.wallpaper i:nth-child(2) { width: 45vw; height: 45vw; right: -8vw; top: 5vh;   background: var(--violet); animation: float2 34s ease-in-out infinite alternate; }
+.wallpaper i:nth-child(3) { width: 50vw; height: 50vw; left: 15vw; bottom: -25vw; background: var(--pink);   animation: float3 31s ease-in-out infinite alternate; }
+.wallpaper i:nth-child(4) { width: 35vw; height: 35vw; right: 10vw; bottom: -10vw; background: var(--teal);   animation: float1 38s ease-in-out infinite alternate-reverse; }
+@keyframes float1 { to { transform: translate3d(8vw, 6vh, 0) scale(1.1); } }
+@keyframes float2 { to { transform: translate3d(-9vw, 10vh, 0) scale(.92); } }
+@keyframes float3 { to { transform: translate3d(7vw, -8vh, 0) scale(1.12); } }
+
+/* Faint stars that twinkle */
+.wallpaper::before, .wallpaper::after {
+  content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 2px; border-radius: 50%;
+  animation: twinkle 7s ease-in-out infinite alternate;
+}
+.wallpaper::before { box-shadow:
+    32.4vw 15.1vh 0 0 rgba(190,205,255,0.9),
+    82.1vw 9.4vh 0 0 rgba(190,205,255,0.9),
+    50.7vw 3.7vh 0 0 rgba(255,255,255,0.7),
+    24.1vw 55.1vh 0 0 rgba(255,255,255,0.5),
+    12.4vw 22.3vh 0 0 rgba(255,255,255,0.9),
+    6.2vw 58.6vh 0 0 rgba(255,255,255,0.5),
+    4.7vw 85.8vh 0 0 rgba(255,255,255,0.7),
+    54.1vw 57.1vh 0 0 rgba(255,255,255,0.9),
+    18.1vw 58.2vh 0 0 rgba(255,255,255,0.9),
+    9.7vw 71.2vh 0 0 rgba(190,205,255,0.9),
+    20.6vw 68.0vh 0 0 rgba(255,255,255,0.7),
+    46.6vw 92.3vh 0 0 rgba(255,255,255,0.7),
+    79.4vw 69.9vh 0 0 rgba(190,205,255,0.5),
+    30.0vw 49.5vh 0 0 rgba(255,255,255,0.7),
+    28.8vw 98.0vh 0 0 rgba(255,255,255,0.5),
+    16.5vw 34.2vh 0 0 rgba(255,255,255,0.7),
+    96.2vw 7.8vh 0 0 rgba(255,255,255,0.9),
+    87.5vw 31.4vh 0 0 rgba(255,255,255,0.9),
+    49.7vw 79.7vh 0 0 rgba(255,255,255,0.5),
+    94.5vw 47.4vh 0 0 rgba(190,205,255,0.9),
+    73.1vw 31.0vh 0 0 rgba(255,255,255,0.9),
+    82.2vw 28.5vh 0 0 rgba(255,255,255,0.7),
+    34.7vw 94.1vh 0 0 rgba(255,255,255,0.7),
+    11.7vw 5.9vh 0 0 rgba(190,205,255,0.7),
+    24.8vw 39.1vh 0 0 rgba(190,205,255,0.7),
+    44.9vw 54.9vh 0 0 rgba(255,255,255,0.5),
+    86.4vw 27.8vh 0 0 rgba(255,255,255,0.7),
+    68.3vw 38.0vh 0 0 rgba(255,255,255,0.5),
+    17.6vw 23.2vh 0 0 rgba(190,205,255,0.5),
+    83.1vw 18.2vh 0 0 rgba(190,205,255,0.7),
+    41.9vw 36.9vh 0 0 rgba(255,255,255,0.9),
+    12.5vw 85.9vh 0 0 rgba(255,255,255,0.9),
+    74.0vw 45.7vh 0 0 rgba(255,255,255,0.9),
+    39.2vw 39.9vh 0 0 rgba(255,255,255,0.5),
+    40.0vw 19.1vh 0 0 rgba(255,255,255,0.5),
+    11.0vw 60.1vh 0 0 rgba(190,205,255,0.5),
+    15.1vw 10.1vh 0 0 rgba(255,255,255,0.7),
+    7.0vw 20.8vh 0 0 rgba(190,205,255,0.7),
+    25.2vw 34.7vh 0 0 rgba(255,255,255,0.7),
+    11.5vw 48.8vh 0 0 rgba(255,255,255,0.7),
+    31.2vw 14.4vh 0 0 rgba(255,255,255,0.9),
+    26.5vw 82.9vh 0 0 rgba(255,255,255,0.5),
+    20.5vw 95.2vh 0 0 rgba(190,205,255,0.7),
+    54.3vw 2.7vh 0 0 rgba(255,255,255,0.9),
+    64.3vw 9.1vh 0 0 rgba(255,255,255,0.7),
+    90.8vw 35.6vh 0 0 rgba(255,255,255,0.5),
+    77.9vw 33.0vh 0 0 rgba(255,255,255,0.5),
+    78.8vw 75.8vh 0 0 rgba(255,255,255,0.5),
+    81.8vw 74.0vh 0 0 rgba(255,255,255,0.5),
+    49.3vw 73.1vh 0 0 rgba(255,255,255,0.5),
+    47.2vw 19.4vh 0 0 rgba(255,255,255,0.9),
+    44.7vw 93.7vh 0 0 rgba(255,255,255,0.7),
+    36.5vw 22.0vh 0 0 rgba(255,255,255,0.5),
+    33.8vw 48.3vh 0 0 rgba(255,255,255,0.9),
+    47.9vw 65.3vh 0 0 rgba(190,205,255,0.9),
+    66.1vw 91.0vh 0 0 rgba(255,255,255,0.9),
+    47.8vw 17.9vh 0 0 rgba(255,255,255,0.9),
+    80.1vw 97.2vh 0 0 rgba(255,255,255,0.7),
+    74.3vw 8.5vh 0 0 rgba(255,255,255,0.5),
+    12.7vw 15.1vh 0 0 rgba(255,255,255,0.7),
+    14.6vw 82.7vh 0 0 rgba(255,255,255,0.7),
+    35.0vw 54.9vh 0 0 rgba(190,205,255,0.5),
+    79.9vw 72.6vh 0 0 rgba(255,255,255,0.5),
+    93.4vw 43.4vh 0 0 rgba(255,255,255,0.5),
+    21.1vw 25.2vh 0 0 rgba(255,255,255,0.7),
+    76.4vw 32.6vh 0 0 rgba(255,255,255,0.9),
+    13.1vw 91.0vh 0 0 rgba(255,255,255,0.7),
+    66.2vw 81.5vh 0 0 rgba(255,255,255,0.9),
+    91.8vw 50.2vh 0 0 rgba(255,255,255,0.9),
+    51.1vw 87.3vh 0 0 rgba(255,255,255,0.5); }
+.wallpaper::after { animation-duration: 11s; animation-delay: -4s; box-shadow:
+    77.6vw 15.0vh 0 0 rgba(255,255,255,0.5),
+    72.5vw 55.6vh 0 0 rgba(255,255,255,0.7),
+    53.1vw 48.2vh 0 0 rgba(255,255,255,0.5),
+    5.7vw 19.1vh 0 0 rgba(255,255,255,0.5),
+    50.8vw 56.2vh 0 0 rgba(255,255,255,0.5),
+    61.3vw 50.6vh 0 0 rgba(255,255,255,0.9),
+    27.7vw 50.8vh 0 0 rgba(255,255,255,0.7),
+    24.8vw 52.3vh 0 0 rgba(255,255,255,0.7),
+    89.3vw 20.3vh 0 0 rgba(190,205,255,0.7),
+    12.2vw 44.2vh 0 0 rgba(255,255,255,0.5),
+    42.8vw 21.3vh 0 0 rgba(255,255,255,0.7),
+    89.7vw 15.4vh 0 0 rgba(255,255,255,0.9),
+    36.6vw 25.3vh 0 0 rgba(255,255,255,0.5),
+    22.0vw 95.3vh 0 0 rgba(255,255,255,0.7),
+    16.3vw 66.8vh 0 0 rgba(255,255,255,0.5),
+    43.2vw 51.6vh 0 0 rgba(255,255,255,0.7),
+    35.7vw 9.2vh 0 0 rgba(190,205,255,0.7),
+    55.4vw 44.0vh 0 0 rgba(255,255,255,0.5),
+    51.7vw 29.5vh 0 0 rgba(190,205,255,0.5),
+    91.9vw 22.9vh 0 0 rgba(190,205,255,0.5),
+    27.2vw 90.6vh 0 0 rgba(255,255,255,0.5),
+    13.0vw 42.2vh 0 0 rgba(255,255,255,0.9),
+    25.9vw 14.9vh 0 0 rgba(255,255,255,0.9),
+    70.0vw 8.9vh 0 0 rgba(255,255,255,0.5),
+    18.3vw 89.5vh 0 0 rgba(255,255,255,0.7),
+    63.4vw 80.2vh 0 0 rgba(255,255,255,0.5),
+    22.2vw 26.4vh 0 0 rgba(255,255,255,0.5),
+    33.9vw 55.3vh 0 0 rgba(255,255,255,0.7),
+    4.3vw 71.0vh 0 0 rgba(255,255,255,0.5),
+    26.2vw 18.1vh 0 0 rgba(255,255,255,0.7),
+    53.1vw 20.6vh 0 0 rgba(255,255,255,0.7),
+    17.8vw 34.7vh 0 0 rgba(255,255,255,0.5),
+    3.7vw 1.8vh 0 0 rgba(255,255,255,0.9),
+    18.9vw 47.5vh 0 0 rgba(190,205,255,0.7),
+    81.9vw 43.2vh 0 0 rgba(255,255,255,0.7),
+    88.9vw 97.0vh 0 0 rgba(255,255,255,0.7),
+    98.2vw 34.3vh 0 0 rgba(255,255,255,0.9),
+    14.0vw 98.9vh 0 0 rgba(255,255,255,0.5),
+    1.4vw 62.5vh 0 0 rgba(255,255,255,0.7),
+    5.5vw 66.5vh 0 0 rgba(255,255,255,0.7),
+    67.1vw 28.2vh 0 0 rgba(255,255,255,0.5),
+    4.5vw 18.5vh 0 0 rgba(255,255,255,0.7),
+    26.3vw 96.2vh 0 0 rgba(255,255,255,0.9),
+    3.4vw 88.2vh 0 0 rgba(255,255,255,0.5),
+    0.1vw 38.2vh 0 0 rgba(255,255,255,0.7); }
+@keyframes twinkle { from { opacity: .35; } to { opacity: 1; } }
+
+/* ---------- Liquid glass ---------- */
+.glass, .card, .photo, nav .wrap {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.05));
+  -webkit-backdrop-filter: blur(26px) saturate(185%);
+          backdrop-filter: blur(26px) saturate(185%);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),        /* bright top edge */
+    inset 0 -1px 0 rgba(255,255,255,.06),
+    inset 0 0 22px rgba(255,255,255,.04),
+    0 18px 50px -16px rgba(0,0,12,.7);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* A soft highlight that follows the pointer, like light moving across the glass */
+.glass::before, .card::before, .photo::before, nav .wrap::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(190,205,255,.24), transparent 65%);
+  opacity: 0; transition: opacity .5s var(--ease);
+}
+.glass:hover::before, .card:hover::before, .photo:hover::before, nav .wrap:hover::before { opacity: 1; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .card, .photo, nav .wrap { background: rgba(18,24,52,.9); }
+}
+
+/* ---------- Navigation: a floating glass bar ---------- */
+nav { position: sticky; top: .85rem; z-index: 10; padding: 0 1rem; transition: transform .6s var(--ease), opacity .6s var(--ease); }
+nav.hide { transform: translateY(calc(-100% - 1.5rem)); opacity: 0; pointer-events: none; }
+nav:focus-within { transform: none; opacity: 1; pointer-events: auto; }
+nav .wrap { max-width: 68rem; height: 3.6rem; border-radius: 999px; display: flex; justify-content: space-between; align-items: center; padding: 0 .9rem 0 1.5rem; }
+.brand { font-weight: 600; letter-spacing: -0.03em; font-size: 1.1rem; color: var(--ink); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.links { display: flex; gap: .25rem; position: relative; z-index: 1; }
+.links a { color: var(--muted); text-decoration: none; font-size: .95rem; font-weight: 500; padding: .45rem 1rem; border-radius: 999px;
+           transition: background .35s var(--ease), color .35s var(--ease); }
+.links a:hover { background: rgba(255,255,255,.12); color: var(--ink); }
+.links a[aria-current="page"] { background: rgba(255,255,255,.2); color: var(--ink); box-shadow: inset 0 1px 0 rgba(255,255,255,.25); }
+.brand { position: relative; z-index: 1; }
+
+/* ---------- Hero: introduction and photo ---------- */
+.hero { min-height: calc(100vh - 5rem); min-height: calc(100dvh - 5rem); display: flex; align-items: center; padding: 3rem 0 4rem; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; align-items: center; width: 100%; will-change: transform, opacity; }
+.hero h1 { font-size: clamp(2.9rem, 7.5vw, 5.25rem); line-height: 1.02; margin-bottom: 1.5rem; }
+.hero .lede { font-size: 1.25rem; color: var(--muted); max-width: 30rem; margin-bottom: 2rem; }
+.button {
+  display: inline-block; padding: .8rem 1.5rem; border-radius: 999px;
+  background: var(--ink); color: #0b1020; text-decoration: none; font-weight: 500; font-size: .95rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 8px 24px -8px rgba(120,140,255,.45);
+  transition: transform .35s var(--ease), background .35s var(--ease);
+}
+.button:hover { background: var(--accent); color: #0b1020; transform: translateY(-2px); }
+.button.ghost { background: rgba(255,255,255,.08); color: var(--ink); margin-left: .5rem;
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.25); box-shadow: inset 0 1px 0 rgba(255,255,255,.2); }
+.button.ghost:hover { background: rgba(255,255,255,.18); color: var(--ink); }
+
+/* Photo frame. To use your photo: delete the .photo-placeholder div and add
+   <img src="your-photo.jpg" alt="A photo of you"> inside .photo */
+.photo { aspect-ratio: 4 / 5; border-radius: 32px; padding: .6rem; }
+.photo img, .photo-placeholder { width: 100%; height: 100%; border-radius: 24px; display: block; }
+.photo img { object-fit: cover; }
+.photo-placeholder { display: grid; place-items: center; text-align: center; color: var(--muted); font-size: .95rem; padding: 1rem;
+  background: linear-gradient(160deg, rgba(255,255,255,.1), rgba(107,63,192,.45) 60%, rgba(44,71,184,.55)); }
+
+/* Hero intro animation on load */
+.hero-grid > * { animation: rise 1.2s var(--ease) both; }
+.hero-grid > *:nth-child(2) { animation-delay: .15s; }
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Sections: each one a glass panel ---------- */
+section { padding: 1.25rem 0; }
+.panel { border-radius: 32px; padding: 2.75rem; }
+.section-head { display: grid; grid-template-columns: 12rem 1fr; gap: 2rem; }
+h2 { font-size: .78rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; padding-top: .45rem; color: var(--muted); position: relative; z-index: 1; }
+.panel > * { position: relative; z-index: 1; }
+.prose { max-width: 40rem; }
+.prose p:last-child { margin-bottom: 0; }
+.meta { color: var(--muted); font-size: .9rem; margin-bottom: .25rem; }
+
+/* Cards: glass inside glass */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 1.25rem; }
+.card {
+  border-radius: 22px; padding: 1.5rem; display: flex; flex-direction: column; gap: .5rem;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.card > * { position: relative; z-index: 1; }
+.card:hover { transform: translateY(-4px); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), inset 0 0 22px rgba(255,255,255,.06), 0 26px 55px -16px rgba(0,0,12,.8); }
+.card h3 { font-size: 1.3rem; line-height: 1.15; }
+.card p { color: var(--muted); margin: 0; flex: 1; }
+.card a.more { font-weight: 500; text-decoration: none; margin-top: .75rem; }
+.card a.more::after { content: " \2192"; display: inline-block; transition: transform .35s var(--ease); }
+.card a.more:hover::after { transform: translateX(4px); }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .75rem; }
+.tag { font-size: .8rem; padding: .2rem .7rem; border-radius: 999px; background: rgba(255,255,255,.08); color: var(--accent); font-weight: 500; border: 1px solid rgba(255,255,255,.2); }
+/* Project image: shows your picture, cropped to a 16:9 frame. With no image it shows the colored placeholder. */
+.card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+.card:hover .thumb img { transform: scale(1.04); }
+.card .thumb { overflow: hidden; aspect-ratio: 16 / 9; border-radius: 14px; margin-bottom: .75rem; background: linear-gradient(135deg, rgba(255,255,255,.1), rgba(107,63,192,.5)); }
+
+.contact-list { list-style: none; padding: 0; margin: 0; max-width: 40rem; }
+.contact-list li { padding: .9rem 0; border-bottom: 1px solid rgba(255,255,255,.14); display: flex; justify-content: space-between; gap: 1rem; transition: padding-left .4s var(--ease); }
+.contact-list li:last-child { border-bottom: 0; }
+.contact-list li:hover { padding-left: .4rem; }
+.contact-list span { color: var(--muted); }
+.contact-list a, .prose { overflow-wrap: anywhere; }
+
+.page-title { padding: 5rem 0 2.5rem; }
+.page-title h1 { font-size: clamp(2.75rem, 6.5vw, 4.25rem); line-height: 1.02; margin-bottom: 1rem; }
+.page-title p { color: var(--muted); font-size: 1.2rem; max-width: 34rem; }
+.projects { padding-bottom: 2rem; }
+
+footer { padding: 3rem 0 4rem; color: var(--muted); font-size: .9rem; }
+
+/* Scroll reveal (only runs when JavaScript is on) */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.js .reveal.in { opacity: 1; transform: none; }
+.js .grid .reveal:nth-child(2) { transition-delay: .08s; }
+.js .grid .reveal:nth-child(3) { transition-delay: .16s; }
+
+/* ---------- Responsive: laptops, iPads, phones ---------- */
+@media (min-width: 90rem) { .wrap, nav .wrap { max-width: 76rem; } }           /* very large screens */
+
+@media (max-width: 64rem) {                                                    /* iPad landscape, small laptops */
+  .hero-grid { gap: 2.5rem; }
+  .section-head { grid-template-columns: 9rem 1fr; gap: 1.5rem; }
+  .panel { padding: 2.25rem; }
+}
+@media (max-width: 52rem) {                                                    /* iPad portrait */
+  .hero { min-height: auto; padding: 2.5rem 0 3rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .photo { max-width: 24rem; width: 100%; }
+  .section-head { grid-template-columns: 1fr; gap: .75rem; }
+  .panel { padding: 1.9rem; border-radius: 26px; }
+  .page-title { padding: 3.5rem 0 2rem; }
+  .wallpaper i:nth-child(-n+3) { width: 95vw; height: 95vw; }
+  .wallpaper i:nth-child(4) { width: 75vw; height: 75vw; }
+}
+@media (max-width: 40rem) {                                                    /* phones */
+  nav { padding: 0 .6rem; top: .5rem; }
+  nav .wrap { height: 3.25rem; padding: 0 .45rem 0 1.15rem; }
+  .brand { font-size: 1.05rem; }
+  .links a { padding: .4rem .75rem; font-size: .9rem; }
+  .hero { padding: 2rem 0 2.5rem; }
+  .button { display: block; text-align: center; }
+  .button.ghost { margin: .65rem 0 0; }
+  .panel { padding: 1.5rem; border-radius: 22px; }
+  .card { padding: 1.15rem; border-radius: 18px; }
+  .contact-list li { flex-direction: column; gap: .1rem; }
+  .glass, .card, .photo, nav .wrap { -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%); }
+}
+@media (max-width: 24rem) { .links a { padding: .4rem .5rem; } .brand { font-size: 1rem; } }   /* small phones */
+@media (max-height: 32rem) and (orientation: landscape) { .hero { min-height: auto; padding: 2rem 0; } }  /* phones on their side */
+
+/* Touch screens have no hover, so skip the hover movements there */
+@media (hover: none) {
+  .card:hover, .button:hover { transform: none; }
+  .card:hover .thumb img { transform: none; }
+  .contact-list li:hover { padding-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
